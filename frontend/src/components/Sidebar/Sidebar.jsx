@@ -15,6 +15,8 @@ const Sidebar = () => {
                     <Button label={"Thông tin dự án"} path={'/du-an'} className="w-full"/>
                     <Button label={"Thông tin nhân viên"} path={'/nhan-vien'} className="w-full"/>
                     <Button label={"Tính lương"} path={'/tinh-luong'} className='w-full'/>
+                    <Button label={"Check in"} path={'/check-in'} className='w-full'/>
+                    <Button label={"Check-out"} path={'/check-out'} className='w-full'/>
                 </div>
             </div>
             <div className="border-t border-slate-300">

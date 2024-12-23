@@ -11,6 +11,8 @@ import NhanVienInsert from './pages/NhanVienInsert';
 import NhanVienEdit from './pages/NhanVienEdit';
 import TinhLuong from './pages/tinhLuong';
 import PhongBanInsert from './pages/PhongBanInsert';
+import CheckIn from './pages/CheckIn';
+import CheckOut from './pages/CheckOut';
 
 // function App() {
 //   // Tạo state để lưu trữ danh sách nhân viên
@@ -76,6 +78,8 @@ function App() {
           <Route path="/nhan-vien/edit/:MaNV" element={<NhanVienEdit />} />
 
           <Route path='tinh-luong' element={<TinhLuong/>}/>
+          <Route path='/check-in' element={<CheckIn/>}/>
+          <Route path='/check-out' element={<CheckOut/>}/>
         </Routes>
       </div>
     </div>

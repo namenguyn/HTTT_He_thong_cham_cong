@@ -144,3 +144,5 @@ CREATE TABLE BangLuong (
     FOREIGN KEY (MaNV) REFERENCES NhanVien(MaNV),
     FOREIGN KEY (NgayApDung) REFERENCES BangThietLapLuong(NgayApDung)
 );
+
+

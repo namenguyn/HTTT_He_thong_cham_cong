@@ -1,0 +1,127 @@
+/* FaceAuthentication.module.css */
+
+.container {
+    max-width: 700px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    background-color: #fff;
+  }
+  
+  .title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .webcamContainer {
+    width: 600px;
+    height: 600px;
+    margin: 0 auto;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    position: relative;
+    background-color: #000;
+  }
+  
+  .loadingSpinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .errorMessage {
+    color: red;
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  .labelDisplay {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #555;
+  }
+  
+  .switchContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .switchLabel {
+    margin-left: 10px;
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .successMessage {
+    text-align: center;
+    color: green;
+    margin-top: 15px;
+  }
+  
+  .dataPreview {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f4f4f4;
+    border-radius: 5px;
+    font-family: monospace;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+  .toastContainer {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+  }
+  
+  .toast {
+    display: flex;
+    align-items: center;
+    min-width: 250px;
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    background-color: #4caf50; /* Màu xanh lá cho thành công */
+    color: white;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    opacity: 0;
+    transform: translateX(100%);
+    animation: slideIn 0.5s forwards, fadeOut 0.5s forwards 2.5s;
+  }
+  
+  .toastError {
+    background-color: #f44336; /* Màu đỏ cho lỗi */
+  }
+  
+  @keyframes slideIn {
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes fadeOut {
+    to {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+  }
+  
+  .closeButton {
+    margin-left: auto;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
