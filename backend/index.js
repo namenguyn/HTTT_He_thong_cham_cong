@@ -3,6 +3,7 @@ import dotenv from 'dotenv'
 import { getChiNhanh, getChiNhanh_Manager, getMaChiNhanh_TenChiNhanh, getMaNV_TenNhanVien, getNhanVien, getPhongBan, insertChiNhanh, insertNhanVien, deleteNhanVien, updateNhanVien, getDanhSachPhongBan, getNhanVienByMaNV, getMaPhongBan_TenPhongBan, getBangLuong, getPhongBanInfo, getPhongBanInfo_Manager, getPhongBanCoSoLuongNhanVienLonHon, getPhongBanCoSoLuongNhanVienCoMatNhieuNhat } from './api.js'
 import { getHienThiTrangThai } from './api.js';
 import bodyParser from 'body-parser'
+import { ReadFromProcedureQuery, ReadQuery, WriteQuery } from "./database.js";
 
 dotenv.config()
 
@@ -10,6 +11,50 @@ const app = express()
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 const PORT = process.env.BE_PORT || 3000
+
+app.post('/api/login', async (req, res) => {
+    const { username, password } = req.body;
+
+    try {
+        // Check user credentials in the database
+        const sql = 'SELECT username, fullname, email FROM admins WHERE username = ? AND password = ?';
+        const [user] = await ReadQuery(sql, [username, password]);
+
+        if (!user) {
+            return res.status(401).json({ success: false, message: 'Invalid username or password' });
+        }
+
+        // Send a success response with user details
+        res.status(200).json({ success: true, message: 'Login successful', user });
+    } catch (error) {
+        console.error('Error during login:', error.message);
+        res.status(500).json({ success: false, message: 'Internal server error' });
+    }
+});
+
+app.get('/api/admin-info', async (req, res) => {
+    const { username } = req.query; // Extract the username from query parameters
+
+    if (!username) {
+        return res.status(400).json({ success: false, message: 'Username is required' });
+    }
+
+    try {
+        const sql = 'SELECT fullname, email FROM admins WHERE username = ?'; // Filter by username
+        const [result] = await ReadQuery(sql, [username]); // Pass username as a parameter
+
+        if (!result) {
+            return res.status(404).json({ success: false, message: 'Admin not found' });
+        }
+
+        const admin = [result[0], result[1]]; // Return fullname and email in an array
+        // console.log('Admin data:', result); // Debugging
+        res.status(200).json({ success: true, admin });
+    } catch (error) {
+        console.error('Error in /api/admin-info:', error.message);
+        res.status(500).json({ success: false, message: 'Internal server error' });
+    }
+});
 
 app.get('/', (req, res) => {
     res.send('Hello world')
