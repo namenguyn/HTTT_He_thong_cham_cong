@@ -11,8 +11,16 @@ import NhanVienInsert from './pages/NhanVienInsert';
 import NhanVienEdit from './pages/NhanVienEdit';
 import TinhLuong from './pages/tinhLuong';
 import PhongBanInsert from './pages/PhongBanInsert';
+RECORDER
 import CheckIn from './pages/CheckIn';
 import CheckOut from './pages/CheckOut';
+=======
+import { useLocation } from 'react-router-dom';
+import LoginPage from './pages/LoginPage';
+import PersonalInfo from './pages/PersonalInfo';
+import LogoutButton from './pages/Logout';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
+main
 
 // function App() {
 //   // Tạo state để lưu trữ danh sách nhân viên
@@ -61,25 +69,39 @@ import CheckOut from './pages/CheckOut';
 // }
 
 function App() {
+  const location = useLocation(); // Get the current route path
+  const hideSidebarRoutes = ['/login']; // Add paths where you don't want the sidebar
+  const showSidebar = !hideSidebarRoutes.includes(location.pathname);
+
   return (
     <div className='flex flex-row'>
-      <Sidebar/>
+      {showSidebar && <Sidebar/>}
       <div className='w-full'>
         <Routes>
-          <Route path='/' element={<ChiNhanhInfo/>}/>
-          <Route path='/chi-nhanh' element={<ChiNhanhInfo/>}/>
-          <Route path='/phong-ban' element={<PhongBanInfo/>}/>
-          <Route path='/du-an' element={<DuAnInfo/>}/>
-          <Route path='/nhan-vien' element={<NhanVienInfo/>}/>
+          <Route path="/login" element={<LoginPage />} />
 
-          <Route path='/chi-nhanh/insert' element={<ChiNhanhInsert/>}/>
-          <Route path='/phong-ban/insert' element={<PhongBanInsert/>}/>
-          <Route path='/nhan-vien/insert' element={<NhanVienInsert/>}/>
-          <Route path="/nhan-vien/edit/:MaNV" element={<NhanVienEdit />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path='/' element={<ChiNhanhInfo/>}/>
+            <Route path='/chi-nhanh' element={<ChiNhanhInfo/>}/>
+            <Route path='/phong-ban' element={<PhongBanInfo/>}/>
+            <Route path='/du-an' element={<DuAnInfo/>}/>
+            <Route path='/nhan-vien' element={<NhanVienInfo/>}/>
 
+            <Route path='/chi-nhanh/insert' element={<ChiNhanhInsert/>}/>
+            <Route path='/phong-ban/insert' element={<PhongBanInsert/>}/>
+            <Route path='/nhan-vien/insert' element={<NhanVienInsert/>}/>
+            <Route path="/nhan-vien/edit/:MaNV" element={<NhanVienEdit />} />
+
+ RECORDER
           <Route path='tinh-luong' element={<TinhLuong/>}/>
           <Route path='/check-in' element={<CheckIn/>}/>
           <Route path='/check-out' element={<CheckOut/>}/>
+
+            <Route path='tinh-luong' element={<TinhLuong/>}/>
+            <Route path="/personal-info" element={<PersonalInfo />} />
+            <Route path="/logout" element={<LogoutButton />} />
+          </Route>
+ main
         </Routes>
       </div>
     </div>
