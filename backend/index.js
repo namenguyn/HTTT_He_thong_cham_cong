@@ -26,15 +26,14 @@ import {
   insertPhongBan
 } from './api.js';
 import { getHienThiTrangThai } from './api.js';
- RECORDER
+
 import { insertBangChamCong } from './api.js';
 
 dotenv.config();
 
 const app = express();
-import bodyParser from 'body-parser'
 import { ReadFromProcedureQuery, ReadQuery, WriteQuery } from "./database.js";
- main
+
 
 // Cấu hình CORS
 app.use(cors({
@@ -48,7 +47,7 @@ app.use(cors({
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-RECORDER
+
 const PORT = process.env.BE_PORT || 5000; // Đảm bảo cổng đúng
 
 // Các route của bạn...
@@ -97,7 +96,6 @@ app.get('/api/admin-info', async (req, res) => {
     }
 });
 
-main
 app.get('/', (req, res) => {
     res.send('Hello world');
 });
