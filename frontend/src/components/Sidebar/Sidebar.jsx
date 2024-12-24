@@ -8,12 +8,15 @@ const Sidebar = () => {
             <div>
                 <div className="w-full h-fit flex flex-col items-center py-5 border-b border-slate-300">
                     <Avatar/>
+Login-Function
                     <p className="font-semibold text-lg"><Button label={fullname} path={'/personal-info'}></Button></p>
+                    <p className="font-semibold text-lg">Quản lý công ty</p>
+main
                 </div>
                 <div>
                     <Button label={"Thông tin chi nhánh"} path={'/chi-nhanh'} className="w-full"/>
                     <Button label={"Thông tin phòng ban"} path={'/phong-ban'} className="w-full"/>
-                    <Button label={"Thông tin dự án"} path={'/du-an'} className="w-full"/>
+                    <Button label={"Hiển thị trạng thái"} path={'/du-an'} className="w-full"/>
                     <Button label={"Thông tin nhân viên"} path={'/nhan-vien'} className="w-full"/>
                     <Button label={"Tính lương"} path={'/tinh-luong'} className='w-full'/>
                 </div>
