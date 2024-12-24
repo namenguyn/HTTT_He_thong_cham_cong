@@ -11,11 +11,16 @@ import NhanVienInsert from './pages/NhanVienInsert';
 import NhanVienEdit from './pages/NhanVienEdit';
 import TinhLuong from './pages/tinhLuong';
 import PhongBanInsert from './pages/PhongBanInsert';
+RECORDER
+import CheckIn from './pages/CheckIn';
+import CheckOut from './pages/CheckOut';
+=======
 import { useLocation } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import PersonalInfo from './pages/PersonalInfo';
 import LogoutButton from './pages/Logout';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
+main
 
 // function App() {
 //   // Tạo state để lưu trữ danh sách nhân viên
@@ -87,10 +92,16 @@ function App() {
             <Route path='/nhan-vien/insert' element={<NhanVienInsert/>}/>
             <Route path="/nhan-vien/edit/:MaNV" element={<NhanVienEdit />} />
 
+ RECORDER
+          <Route path='tinh-luong' element={<TinhLuong/>}/>
+          <Route path='/check-in' element={<CheckIn/>}/>
+          <Route path='/check-out' element={<CheckOut/>}/>
+
             <Route path='tinh-luong' element={<TinhLuong/>}/>
             <Route path="/personal-info" element={<PersonalInfo />} />
             <Route path="/logout" element={<LogoutButton />} />
           </Route>
+ main
         </Routes>
       </div>
     </div>

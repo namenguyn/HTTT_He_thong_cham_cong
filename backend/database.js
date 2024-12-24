@@ -1,64 +1,50 @@
-import msyql from 'mysql2/promise'
-import { configDotenv } from 'dotenv'
-configDotenv()
+// database.js
 
-const connection_info = {
+import mysql from 'mysql2/promise';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+// Tạo một connection pool
+export const pool = mysql.createPool({
     host: process.env.MYSQL_HOST,
     user: process.env.MYSQL_USER,
     password: process.env.MYSQL_PASSWORD,
     database: process.env.MYSQL_DATABASE,
-    rowsAsArray: true,
-}
+    waitForConnections: true,
+    connectionLimit: 10, // Số lượng kết nối tối đa
+    queueLimit: 0
+});
 
-export async function ReadQuery(sql, param) {
-    let result = '';
-    let success = true
+// Hàm để thực hiện các truy vấn đọc
+export async function ReadQuery(sql, params = []) {
     try {
-        const connection = await msyql.createConnection(connection_info)
-        result = await connection.execute(sql, param);
-        // console.log(result);
+        const [rows, fields] = await pool.execute(sql, params);
+        return rows;
     } catch (error) {
-        console.log(error.message)
-        success = false;
-        // console.log(success)
+        console.error("Error in ReadQuery:", error);
+        throw error;
     }
-    return result[0];
 }
 
-export async function ReadFromProcedureQuery(sql, param) {
-    let result = '';
-    let success = true
+// Hàm để thực hiện các truy vấn từ thủ tục Stored Procedure và trả về mảng đầu tiên
+export async function ReadFromProcedureQuery(sql, params = []) {
     try {
-        const connection = await msyql.createConnection(connection_info)
-        result = await connection.execute(sql, param);
-        // console.log(result);
+        const [rows, fields] = await pool.execute(sql, params);
+        return rows;
     } catch (error) {
-        console.log(error.message)
-        success = false;
-        // console.log(success)
+        console.error("Error in ReadFromProcedureQuery:", error);
+        throw error;
     }
-    return result[0][0];
 }
 
-export async function WriteQuery(sql, param) {
-    let result = '';
-    let success = true
-    let message = ""
+// Hàm để thực hiện các truy vấn ghi
+export async function WriteQuery(sql, params = []) {
     try {
-        const connection = await msyql.createConnection(connection_info)
-        result = await connection.execute(sql, param);
+        const [result] = await pool.execute(sql, params);
+        return [200, 'Thành công'];
     } catch (error) {
-        message = error.message
-        success = false;
-        // console.log(success)
+        console.error("Error in WriteQuery:", error);
+        return [400, error.message];
     }
-    if (success)
-        return [200, ""];
-    else 
-        return [400, message];
 }
-
-
-
-
-
